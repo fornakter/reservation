@@ -33,7 +33,25 @@ class ResSys:
                 ResSys()
 
     def make_reserv(self):
-        print('Dokonaj rezerwacji')
+        data = []
+        connect = sqlite3.connect("reservation.db")
+        cursor = connect.cursor()
+        data[0] = input("Podaj imie: ")
+        data = ["Asia", "Placek", "2021-12-25"]
+        try:
+            # Add tables
+            cursor.execute("CREATE TABLE reservation(name text, surname text, day date)")
+        except:
+            pass
+
+        cursor.execute("INSERT INTO reservation (name, surname, day) VALUES (?,?,?)", data)
+
+        for row in cursor.execute("select * from reservation"):
+            print(row)
+
+        # Save data
+        connect.commit()
+        connect.close()
 
     def cancel_reserv(self):
         print('Dokonaj rezerwacji')
@@ -45,7 +63,10 @@ class ResSys:
         print('Dokonaj rezerwacji')
 
     def read_me(self):
-        subprocess.Popen(["notepad", "README.md"])
+        try:
+            subprocess.Popen(["notepad", "README.md"])
+        except:
+            subprocess.Popen(["xed", "README.md"])
         ResSys()
 
 
