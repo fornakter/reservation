@@ -1,2 +1,2 @@
 # reservation
-Reservation system - backend internship
+Reservation system - backend
